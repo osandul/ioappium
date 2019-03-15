@@ -29,7 +29,7 @@ public class BookingSignIn {
 
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_start_button ) ).click ( );
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_email_field ) ).click ( );
-        driver.findElement ( signInPage.signIn_email_input ).sendKeys ( "oleksandria.sanddul13@gmail.com" );
+        driver.findElement ( signInPage.signIn_email_input ).sendKeys ( "oleksandria.sanl13@gmail.com" );
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_password_field ) ).click ( );
         driver.findElement ( signInPage.signIn_password_input ).sendKeys ( "1234abcd" );
         driver.findElement ( signInPage.signIn_submit_button ).click ( );
@@ -37,17 +37,12 @@ public class BookingSignIn {
         String signIn_message = driver.findElement ( signInPage.signIn_dialogue_checkmailbox ).getAttribute ( "text" );
 
         Assert.assertEquals ( signIn_message, successful_signIn );
-
-        //       System.out.println ( "The registration was successfully completed" );
-
-        //      signIn_output = false && signIn_message.equals ( email_exists_inDB );
-        //      System.out.println ("Error. This email already exists in base");
-
+        System.out.println ( "The registration was successfully completed" );
 
     }
 
     @Test
-    public void emailExistsTest(){
+    public void emailExistsTest() {
         WebDriverWait wait = new WebDriverWait ( driver, 10 );
 
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_start_button ) ).click ( );
@@ -60,14 +55,15 @@ public class BookingSignIn {
         String signIn_message = driver.findElement ( signInPage.signIn_dialogue_checkmailbox ).getAttribute ( "text" );
 
         Assert.assertEquals ( signIn_message, email_exists_inDB );
+        System.out.println ( "Error. This email already exists in the base" );
     }
 
     @AfterTest
 
     public void quitDriver() {
-        AppiumDriverInit.closeDriver ();
+        AppiumDriverInit.closeDriver ( );
     }
-    
+
 
 }
 
