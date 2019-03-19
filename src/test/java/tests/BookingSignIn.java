@@ -1,12 +1,13 @@
+package tests;
+
 import Capabilities.AppiumDriverInit;
+import Capabilities.ReadPropertyFile;
 import PageObjects.SignInPage;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class BookingSignIn {
     AppiumDriver driver;
@@ -17,21 +18,21 @@ public class BookingSignIn {
     public String email_exists_inDB = "Please enter a different email address, this one has been saved to an existing profile.";
 
 
-    @BeforeTest
-    public void setDriver() {
+    @BeforeMethod
+    public void setDriverAndroid() {
         driver = AppiumDriverInit.getDriver ( );
     }
 
     @Test
 
     public void signInTest() {
-        WebDriverWait wait = new WebDriverWait ( driver, 10 );
+        WebDriverWait wait = new WebDriverWait ( driver, 20 );
 
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_start_button ) ).click ( );
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_email_field ) ).click ( );
-        driver.findElement ( signInPage.signIn_email_input ).sendKeys ( "oleksandria.sanl13@gmail.com" );
+        driver.findElement ( signInPage.signIn_email_input ).sendKeys ( ReadPropertyFile.getPropertyValue("new_email"));
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_password_field ) ).click ( );
-        driver.findElement ( signInPage.signIn_password_input ).sendKeys ( "1234abcd" );
+        driver.findElement ( signInPage.signIn_password_input ).sendKeys ( ReadPropertyFile.getPropertyValue("new_password"));
         driver.findElement ( signInPage.signIn_submit_button ).click ( );
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_dialogue_checkmailbox ) );
         String signIn_message = driver.findElement ( signInPage.signIn_dialogue_checkmailbox ).getAttribute ( "text" );
@@ -47,9 +48,9 @@ public class BookingSignIn {
 
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_start_button ) ).click ( );
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_email_field ) ).click ( );
-        driver.findElement ( signInPage.signIn_email_input ).sendKeys ( "oleksandra.sandul13@gmail.com" );
+        driver.findElement ( signInPage.signIn_email_input ).sendKeys ( ReadPropertyFile.getPropertyValue ( "existing_email" ) );
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_password_field ) ).click ( );
-        driver.findElement ( signInPage.signIn_password_input ).sendKeys ( "1234abcd" );
+        driver.findElement ( signInPage.signIn_password_input ).sendKeys (ReadPropertyFile.getPropertyValue ( "existing_password" ));
         driver.findElement ( signInPage.signIn_submit_button ).click ( );
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_dialogue_checkmailbox ) );
         String signIn_message = driver.findElement ( signInPage.signIn_dialogue_checkmailbox ).getAttribute ( "text" );
@@ -58,7 +59,7 @@ public class BookingSignIn {
         System.out.println ( "Error. This email already exists in the base" );
     }
 
-    @AfterTest
+    @AfterMethod
 
     public void quitDriver() {
         AppiumDriverInit.closeDriver ( );
