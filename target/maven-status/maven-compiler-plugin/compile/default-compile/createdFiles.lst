@@ -1,0 +1,3 @@
+PageObjects\SignInPage.class
+Capabilities\AppiumDriverInit.class
+Capabilities\ReadPropertyFile.class
