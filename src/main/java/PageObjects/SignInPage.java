@@ -1,4 +1,5 @@
 package PageObjects;
+import Capabilities.PropertyFile;
 import org.openqa.selenium.By;
 
 public class SignInPage extends Page {
@@ -13,38 +14,38 @@ public class SignInPage extends Page {
     private final String SIGNIN_EMAIL_ACTIVATE_MESSAGE = "Check your inbox for an email. Use the provided link to activate your account.";
     private final String SIGNIN_EMAIL_EXISTS_MESSAGE = "Please enter a different email address, this one has been saved to an existing profile.";
 
-    public By getSignIn_start_button() {
-        return signIn_start_button;
+
+
+    public void tapOnSignInButton() {
+       clickOnElement ( signIn_start_button );
     }
 
 
-    public By getSignIn_email_field() {
-        return signIn_email_field;
+    public void  tapOnSignInEmailField() {
+        clickOnElement ( signIn_email_field );
     }
 
-
-    public By getSignIn_email_input() {
-        return signIn_email_input;
+    public void SendExistingEmailToSignInEmailField(){
+        sendKeysToElement ( signIn_email_input, PropertyFile.getPropertyValue ( "existing_email" ) );
     }
 
-
-    public By getSignIn_password_field() {
-        return signIn_password_field;
+    public void tapOnSignInPasswordField() {
+        clickOnElement ( signIn_password_field );
     }
 
-    public By getSignIn_password_input() {
-        return signIn_password_input;
+    public void SendExistingPasswordToSignInPasswordField(){
+        sendKeysToElement ( signIn_password_input, PropertyFile.getPropertyValue ( "existing_password" ));
     }
 
-
-    public By getSignIn_submit_button() {
-        return signIn_submit_button;
+    public void tapOnSignInSubmitButton() {
+        clickOnElement ( signIn_submit_button );
     }
 
 
     public By getSignIn_dialogue_checkmailbox() {
         return signIn_dialogue_checkmailbox;
     }
+
     public String getSIGNIN_EMAIL_ACTIVATE_MESSAGE() {
         return SIGNIN_EMAIL_ACTIVATE_MESSAGE;
     }
