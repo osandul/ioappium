@@ -1,5 +1,6 @@
 package Capabilities;
 
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -7,46 +8,62 @@ import io.appium.java_client.android.AndroidDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class AppiumDriverInit {
+public class AppiumDriverInit extends PropertyFile {
 
-    private static AppiumDriver driver = null;
+    private static AppiumDriver driver;
 
-    private AppiumDriverInit() {
+    public enum Capability {
+        AVD ( "avd" ),
+        APP_PACKAGE("appPackage"),
+        APP_ACTIVITY("appActivity"),
+        ABD_TIMEOUT("adbExecTimeout"),
+        AUTO_PERMISSIONS("autoGrantPermissions"),
+        AUTOMATION_NAME("automationName");
 
+
+        private final String NAME;
+
+        Capability(String capability) {
+            NAME = capability;
+        }
+
+        @Override
+        public String toString() {
+            return this.NAME;
+        }
     }
+        public static AppiumDriver getDriver() {
+            if (driver == null) {
+                try {
+                    driver = setDriver ( );
+                } catch (MalformedURLException e) {
+                    e.printStackTrace ( );
+                }
+            }
+            return driver;
+        }
 
-    public static AppiumDriver getDriver() {
-        if (driver == null) {
-            try {
-                setDriver ( );
-            } catch (MalformedURLException e) {
-                e.printStackTrace ( );
+            private static AppiumDriver setDriver() throws MalformedURLException {
+            DesiredCapabilities caps = new DesiredCapabilities ( );
+            caps.setCapability ( MobileCapabilityType.DEVICE_NAME, PropertyFile.getAndroidProperty ( "deviceName" ) );
+            caps.setCapability ( MobileCapabilityType.PLATFORM_NAME, PropertyFile.getPropertyValue ( "platformName" ) );
+            caps.setCapability ( MobileCapabilityType.PLATFORM_VERSION, PropertyFile.getAndroidProperty ( "platformVersion" ) );
+            caps.setCapability ( Capability.AVD.toString (), PropertyFile.getAndroidProperty ( "avd" ) );
+            caps.setCapability ( Capability.APP_PACKAGE.toString (), PropertyFile.getAndroidProperty ( "appPackage" ) );
+            caps.setCapability ( Capability.APP_ACTIVITY.toString (), PropertyFile.getAndroidProperty ( "appActivity" ) );
+            caps.setCapability ( Capability.ABD_TIMEOUT.toString (), PropertyFile.getAndroidProperty ( "adbExecTimeout" ) );
+            caps.setCapability ( Capability.AUTO_PERMISSIONS.toString (), PropertyFile.getAndroidProperty ( "autoGrantPermissions" ) );
+            caps.setCapability ( Capability.AUTOMATION_NAME.toString (), PropertyFile.getAndroidProperty ( "automationName" ) );
+            return driver = new AndroidDriver ( new URL ( PropertyFile.getPropertyValue ( "urlToConnect" ) ), caps );
+        }
+
+        public static void closeDriver() {
+            if (driver != null) {
+                getDriver ().quit ();
+                driver = null;
             }
         }
-        return driver;
+
+
     }
-
-    public static AppiumDriver setDriver() throws MalformedURLException {
-        DesiredCapabilities caps = new DesiredCapabilities ( );
-        caps.setCapability ( MobileCapabilityType.DEVICE_NAME,ReadPropertyFile.getAndroidProperty ( "deviceName" ));
-        caps.setCapability ( "avd", ReadPropertyFile.getAndroidProperty ( "avd" ));
-        caps.setCapability ( MobileCapabilityType.PLATFORM_NAME, ReadPropertyFile.getPropertyValue("platformName"));
-        caps.setCapability ( MobileCapabilityType.PLATFORM_VERSION, ReadPropertyFile.getAndroidProperty ("platformVersion"));
-        caps.setCapability ( "appPackage",  ReadPropertyFile.getAndroidProperty ("appPackage"));
-        caps.setCapability ( "appActivity", ReadPropertyFile.getAndroidProperty ("appActivity" ));
-        caps.setCapability ( "adbExecTimeout", ReadPropertyFile.getAndroidProperty ( "adbExecTimeout") );
-        caps.setCapability ( "autoGrantPermissions", ReadPropertyFile.getAndroidProperty ( "autoGrantPermissions"));
-        caps.setCapability ( "automationName", ReadPropertyFile.getAndroidProperty ( "automationName" ));
-        return driver = new AndroidDriver ( new URL ( ReadPropertyFile.getPropertyValue ( "urlToConnect" )) , caps );
-    }
-
-
-    public static void closeDriver() {
-        if (driver != null) {
-            getDriver ( ).quit ( );
-            driver=null;
-        }
-    }
-
-}
 

@@ -3,7 +3,7 @@ package Capabilities;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-public class ReadPropertyFile {
+public class PropertyFile {
 
         private static String pathToAndroidConfigFile = "src/configAndroid.properties";
         private static String pathToConfigFile = "src/config.properties";

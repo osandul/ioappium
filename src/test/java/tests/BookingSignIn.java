@@ -1,21 +1,20 @@
 package tests;
 
 import Capabilities.AppiumDriverInit;
-import Capabilities.ReadPropertyFile;
+import Capabilities.PropertyFile;
+import PageObjects.Page;
 import PageObjects.SignInPage;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class BookingSignIn {
-    AppiumDriver driver;
+public class BookingSignIn extends Page{
+
+    public AppiumDriver driver;
 
     SignInPage signInPage = new SignInPage ( );
 
-    public String successful_signIn = "Check your inbox for an email. Use the provided link to activate your account.";
-    public String email_exists_inDB = "Please enter a different email address, this one has been saved to an existing profile.";
 
 
     @BeforeMethod
@@ -24,40 +23,37 @@ public class BookingSignIn {
     }
 
     @Test
-
     public void signInTest() {
-        WebDriverWait wait = new WebDriverWait ( driver, 20 );
+        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.getSignIn_start_button () ) ).click ( );
+        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.getSignIn_email_field () ) ).click ( );
+        driver.findElement ( signInPage.getSignIn_email_input () ).sendKeys ( PropertyFile.getPropertyValue("new_email"));
+        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.getSignIn_password_field () ) ).click ( );
+        driver.findElement ( signInPage.getSignIn_password_input () ).sendKeys ( PropertyFile.getPropertyValue("new_password"));
+        driver.findElement ( signInPage.getSignIn_submit_button ()).click ( );
+        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.getSignIn_dialogue_checkmailbox () ) );
+        String signIn_message = driver.findElement ( signInPage.getSignIn_dialogue_checkmailbox() ).getAttribute ( "text" );
 
-        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_start_button ) ).click ( );
-        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_email_field ) ).click ( );
-        driver.findElement ( signInPage.signIn_email_input ).sendKeys ( ReadPropertyFile.getPropertyValue("new_email"));
-        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_password_field ) ).click ( );
-        driver.findElement ( signInPage.signIn_password_input ).sendKeys ( ReadPropertyFile.getPropertyValue("new_password"));
-        driver.findElement ( signInPage.signIn_submit_button ).click ( );
-        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_dialogue_checkmailbox ) );
-        String signIn_message = driver.findElement ( signInPage.signIn_dialogue_checkmailbox ).getAttribute ( "text" );
-
-        Assert.assertEquals ( signIn_message, successful_signIn );
+        Assert.assertEquals ( signIn_message, signInPage.getSIGNIN_EMAIL_ACTIVATE_MESSAGE (),"Wrong email" );
         System.out.println ( "The registration was successfully completed" );
 
     }
 
     @Test
     public void emailExistsTest() {
-        WebDriverWait wait = new WebDriverWait ( driver, 10 );
+        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.getSignIn_start_button ( ) ) ).click ( );
+        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.getSignIn_email_field ( ) ) ).click ( );
+        driver.findElement ( signInPage.getSignIn_email_input ( ) ).sendKeys ( PropertyFile.getPropertyValue ( "existing_email" ) );
+        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.getSignIn_password_field ( ) ) ).click ( );
+        driver.findElement ( signInPage.getSignIn_password_input ( ) ).sendKeys ( PropertyFile.getPropertyValue ( "existing_password" ) );
+        driver.findElement ( signInPage.getSignIn_submit_button ( ) ).click ( );
+        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.getSignIn_dialogue_checkmailbox ( ) ) );
+        String signIn_message = driver.findElement ( signInPage.getSignIn_dialogue_checkmailbox ( ) ).getAttribute ( "text" );
 
-        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_start_button ) ).click ( );
-        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_email_field ) ).click ( );
-        driver.findElement ( signInPage.signIn_email_input ).sendKeys ( ReadPropertyFile.getPropertyValue ( "existing_email" ) );
-        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_password_field ) ).click ( );
-        driver.findElement ( signInPage.signIn_password_input ).sendKeys (ReadPropertyFile.getPropertyValue ( "existing_password" ));
-        driver.findElement ( signInPage.signIn_submit_button ).click ( );
-        wait.until ( ExpectedConditions.visibilityOfElementLocated ( signInPage.signIn_dialogue_checkmailbox ) );
-        String signIn_message = driver.findElement ( signInPage.signIn_dialogue_checkmailbox ).getAttribute ( "text" );
+        Assert.assertEquals (signIn_message, signInPage.getSIGNIN_EMAIL_EXISTS_MESSAGE ( ),"This email doesn't exist in the base" );
+        System.out.println ( "This email already exists in the base" );
 
-        Assert.assertEquals ( signIn_message, email_exists_inDB );
-        System.out.println ( "Error. This email already exists in the base" );
     }
+
 
     @AfterMethod
 
