@@ -37,24 +37,20 @@ public class BookingSignIn extends Page{
 
     @Test
     public void emailExistsTest() {
-        signInPage.tapOnSignInButton();
-        signInPage.tapOnSignInEmailField();
-        signInPage.SendExistingEmailToSignInEmailField();
-        signInPage.tapOnSignInPasswordField();
-        signInPage.SendExistingPasswordToSignInPasswordField ();
-        signInPage.tapOnSignInSubmitButton();
+        signInPage.tapOnSignInButton ( );
+        signInPage.tapOnSignInEmailField ( );
+        signInPage.SendExistingEmailToSignInEmailField ( );
+        signInPage.tapOnSignInPasswordField ( );
+        signInPage.SendExistingPasswordToSignInPasswordField ( );
+        signInPage.tapOnSignInSubmitButton ( );
 
-        Assert.assertEquals(getTextFromElement(signInPage.getSignIn_dialogue_checkmailbox()), signInPage.getSIGNIN_EMAIL_EXISTS_MESSAGE(),"This email doesn't exist in the base" );
+        Assert.assertEquals ( getTextFromElement ( signInPage.getSignIn_dialogue_checkmailbox ( ) ), signInPage.getSIGNIN_EMAIL_EXISTS_MESSAGE ( ), "This email doesn't exist in the base" );
         System.out.println ( "This email already exists in the base" );
     }
-
-
     @AfterMethod
 
     public void quitDriver() {
         AppiumDriverInit.closeDriver ( );
     }
-
-
 }
 
