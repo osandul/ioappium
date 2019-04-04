@@ -13,7 +13,7 @@ public abstract class Page {
 
     public final String APP_PACKAGE_NAME = "com.booking:id/";
 
-    public WebDriverWait wait = new WebDriverWait ( driver, 20 );
+    public WebDriverWait wait = new WebDriverWait ( driver, 30 );
 
     public MobileElement waitForVisibilityOfElement(By locator) {
         wait.until ( ExpectedConditions.visibilityOfElementLocated ( locator ) );

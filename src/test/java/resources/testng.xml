@@ -1,8 +1,8 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+        <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Test runner">
-    <test name="Booking test">
-        <packages>
-            <package name="tests.*"/>
-        </packages>
-    </test>
+<test name="Booking test">
+    <packages>
+        <package name="runners.*"/>
+    </packages>
+</test>
 </suite>

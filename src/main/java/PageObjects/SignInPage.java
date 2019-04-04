@@ -29,12 +29,16 @@ public class SignInPage extends Page {
         sendKeysToElement ( signIn_email_input, PropertyFile.getPropertyValue ( "existing_email" ) );
     }
 
+    public void SendNewEmailToSignInEmailField(){
+        sendKeysToElement ( signIn_email_input, PropertyFile.getPropertyValue ( "new_email" ) );
+    }
+
     public void tapOnSignInPasswordField() {
         clickOnElement ( signIn_password_field );
     }
 
-    public void SendExistingPasswordToSignInPasswordField(){
-        sendKeysToElement ( signIn_password_input, PropertyFile.getPropertyValue ( "existing_password" ));
+    public void SendPasswordToSignInPasswordField(){
+        sendKeysToElement ( signIn_password_input, PropertyFile.getPropertyValue ( "password" ));
     }
 
     public void tapOnSignInSubmitButton() {

@@ -30,9 +30,7 @@ public class PropertyFile {
     }
     private static String getPropertyValueFromFile(String path,String key) {
         return  getPropertyFile ( path ).getProperty ( key );
-     }
-
-
+        }
 
     private static String getValuePipeline(String path,String propName) {
         String systemProperty = getSystemProperty(propName);

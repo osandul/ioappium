@@ -20,7 +20,6 @@ public class AppiumDriverInit extends PropertyFile {
         AUTO_PERMISSIONS("autoGrantPermissions"),
         AUTOMATION_NAME("automationName");
 
-
         private final String NAME;
 
         Capability(String capability) {
@@ -63,7 +62,5 @@ public class AppiumDriverInit extends PropertyFile {
                 driver = null;
             }
         }
-
-
     }
 
