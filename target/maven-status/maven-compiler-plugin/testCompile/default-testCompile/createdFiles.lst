@@ -1,0 +1,3 @@
+stepdefs\Def.class
+runners\TestRunner.class
+hooks\ServiceHooks.class

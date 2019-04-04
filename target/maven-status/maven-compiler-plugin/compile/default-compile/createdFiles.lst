@@ -1,0 +1,5 @@
+Capabilities\AppiumDriverInit$Capability.class
+PageObjects\SignInPage.class
+Capabilities\AppiumDriverInit.class
+Capabilities\PropertyFile.class
+PageObjects\Page.class
