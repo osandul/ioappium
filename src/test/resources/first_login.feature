@@ -18,13 +18,13 @@ Feature: Sign in into the system
     And I click on sign in submit button Create account
     Then I see a pop up window with message to enter another email.
 
-  Scenario: Error message while inputting an invalid email
-      When I enter an invalid email address into Email address text field
-      And I enter a valid password into Password text field
-      Then I see message that Email address is invalid
-
-  Scenario: Red colour of the Email input field bottom border while inputting an invalid email
-    When I enter an invalid email address into Email address text field
-    And I enter a valid password into Password text field
-    Then The Email input field bottom border is red
+#  Scenario: Error message while inputting an invalid email
+#      When I enter an invalid email address into Email address text field
+#      And I enter a valid password into Password text field
+#      Then I see message that Email address is invalid
+#
+#  Scenario: Red colour of the Email input field bottom border while inputting an invalid email
+#    When I enter an invalid email address into Email address text field
+#    And I enter a valid password into Password text field
+#    Then The Email input field bottom border is red
 
