@@ -1,0 +1,215 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 6,
+        "name": "I as Guest go to Sign in page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 862113900,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I click on button Create account",
+            "match": {
+              "location": "Def.iClickOnButton()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 25647752100,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ServiceHooks.getDriver()"
+            }
+          }
+        ],
+        "line": 9,
+        "name": "Successful sign in",
+        "description": "",
+        "id": "sign-in-into-the-system;successful-sign-in",
+        "after": [
+          {
+            "result": {
+              "duration": 2650378800,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ServiceHooks.quitDriver()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2196820400,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "I enter a new email address into Email address text field",
+            "match": {
+              "location": "Def.iEnterANewEmailAddressIntoTextField()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1605423300,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "I enter a valid password into Password text field",
+            "match": {
+              "location": "Def.iEnterAPasswordIntoTextField()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 630020900,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "I click on sign in submit button Create account",
+            "match": {
+              "location": "Def.iClickOnSignInButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1576622100,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "I see a pop up window with message to activate your account.",
+            "match": {
+              "location": "Def.iSeeAPopUpWindowWithMessageToActivateYourAccount()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 6,
+        "name": "I as Guest go to Sign in page",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 1023720000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "I click on button Create account",
+            "match": {
+              "location": "Def.iClickOnButton()"
+            },
+            "keyword": "Given "
+          }
+        ]
+      },
+      {
+        "before": [
+          {
+            "result": {
+              "duration": 15729603500,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ServiceHooks.getDriver()"
+            }
+          }
+        ],
+        "line": 15,
+        "name": "Email already exists in the system",
+        "description": "",
+        "id": "sign-in-into-the-system;email-already-exists-in-the-system",
+        "after": [
+          {
+            "result": {
+              "duration": 2493024400,
+              "status": "passed"
+            },
+            "match": {
+              "location": "ServiceHooks.quitDriver()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1867493500,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "I enter an existing in data base email address into Email address text field",
+            "match": {
+              "location": "Def.iEnterAnExistingInDataBaseEmailAddressIntoTextField()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 1824545300,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "I enter a valid password into Password text field",
+            "match": {
+              "location": "Def.iEnterAPasswordIntoTextField()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 636922800,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "I click on sign in submit button Create account",
+            "match": {
+              "location": "Def.iClickOnSignInButton()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1527230500,
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "I see a pop up window with message to enter another email.",
+            "match": {
+              "location": "Def.iSeeAPopUpWindowWithMessageToEnterAnotherEmail()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Sign in into the system",
+    "description": "  As a guest\n  I want to sign in into the system\n  So that I could do booking",
+    "id": "sign-in-into-the-system",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/first_login.feature",
+    "tags": []
+  }
+]
